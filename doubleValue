@@ -3,18 +3,25 @@ extension String {
     func doubleValue() -> Double?
     {
             // split the string into components
+            // comps: string array
             var comps = self.componentsSeparatedByString(".")
             
             // we have nothing
             if comps.count == 0 {
                 return nil
             }
-                // if there is more than one decimal
+            // if there is more than one decimal
             else if comps.count > 2 {
                 return nil
             }
+            /*
             else if comps[0] == "" || comps[1] == "" {
-                return nil
+              return nil
+            }
+            */
+            // if there is no "."
+            else if comps.count == 1 {
+            comps.append("0")
             }
             
             // grab the whole portion
