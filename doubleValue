@@ -1,0 +1,57 @@
+extension String {
+    // converting a string to double
+    func doubleValue() -> Double?
+    {
+            // split the string into components
+            var comps = self.componentsSeparatedByString(".")
+            
+            // we have nothing
+            if comps.count == 0 {
+                return nil
+            }
+                // if there is more than one decimal
+            else if comps.count > 2 {
+                return nil
+            }
+            else if comps[0] == "" || comps[1] == "" {
+                return nil
+            }
+            
+            // grab the whole portion
+            var whole = 0.0
+            // ensure we have a number for the whole
+            if let w = comps[0].toInt() {
+                whole = Double(w)
+            }
+            else {
+                return nil
+            }
+            
+            // we only got the whole
+            if comps.count == 1 {
+                
+                return whole
+                
+            }
+            
+            // grab the fractional
+            var fractional = 0.0
+            // ensure we have a number for the fractional
+            if let f = comps[1].toInt() {
+                
+                // use number of digits to get the power
+                var toThePower = Double(countElements(comps[1]))
+                
+                // compute the fractional portion
+                fractional = Double(f) / pow(10.0, toThePower)
+                
+            }
+            else {
+                return nil
+            }
+            
+            // return the result
+            return whole + fractional
+        }
+
+}
