@@ -37,12 +37,26 @@ testArray.append("third element")
 println("the third elem is \(testArray[2])")
 println("testArray2 has \(testArray2.count) elements.") // do not change
 
+var a = [1, 2, 3]
+var b = a
+var c = a
+
+a[0] = 0
+println("a[0]: \(a[0]), b[0]: \(b[0]), c[0]: \(c[0])")
 
 
 struct Person {
-    let name : String
+    var name : String
     var age : Int? // optional type
 }
+
+/*
+定義の時点で初期値が入っていない場合は instanciate のときに初期値を入れないといけない
+i.e. 
+var/let name : String 
+var/ let age : Int
+などとした場合
+*/
 
 var me = Person(name: "Yuki", age: nil)
 me.age = 23
@@ -62,3 +76,47 @@ var mother = Person(name: "Manami", age: nil)
 
 personArray += [sister, mother]
 
+// class has reference type!!!
+
+class Family {
+    var father = Person(name: "", age: nil)
+    var mother = Person(name: "", age: nil)
+    var children = [Person]()
+}
+
+let myFamily = Family()
+
+myFamily.father.name = "Nobuaki"
+myFamily.mother.name = "Manami"
+myFamily.children += [me, sister]
+
+var herFamily = myFamily
+herFamily.father.name = "Totaro"
+
+println("her father is \(herFamily.father.name)") // change
+println("my father is \(myFamily.father.name)") // DO CHANGE!!
+
+var str1 : String
+str1 = "hello, world"
+var str2 = str1
+str2 = "bonjour, le monde"
+println("str1: \(str1), str2: \(str2)")
+var len = countElements(str1)
+println("the length of str1: \(len)")
+
+var str3 : NSString
+str3 = "hello, world"
+var str4 : NSString
+str4 = str3
+str4 = "bonjour, le monde"
+println("str1: \(str1), str2: \(str2)")
+
+// componentsSeparatedByString
+let doubleStr = "100.512"
+let arr = doubleStr.componentsSeparatedByString(".") // ["100", "512"]
+for a in arr {
+    println("\(a)")
+}
+
+let doubleStr2 = "100"
+let arr2 = doubleStr2.componentsSeparatedByString(".") // ["100"]
